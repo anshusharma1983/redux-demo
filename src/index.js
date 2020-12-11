@@ -1,12 +1,11 @@
-import { compose, pipe } from "lodash/fp";
+import { Map } from "immutable";
 
-let input = "   Javascript  ";
+let book = Map({ title: "Harry Potter" });
 
-const trim = (str) => str.trim();
-const wrap = (type) => (str) => `<${type}>${str}</${type}>`; // currying
-const toLowerCase = (str) => str.toLowerCase();
+function publish(book) {
+  return book.set("isPublished", true);
+}
 
-const transform = pipe(trim, toLowerCase, wrap("div"));
-const transformedOutput = transform(input);
+book = publish(book);
 
-console.log(transformedOutput);
+console.log(book.toJS());
